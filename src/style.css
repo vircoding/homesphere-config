@@ -1,0 +1,154 @@
+@import 'tailwindcss';
+
+@font-face {
+  font-family: Nunito;
+  font-weight: 400;
+  src: url('./assets/fonts/Nunito-Regular.ttf');
+}
+
+@font-face {
+  font-family: Nunito;
+  font-weight: 600;
+  src: url('./assets/fonts/Nunito-SemiBold.ttf');
+}
+
+@font-face {
+  font-family: Nunito;
+  font-weight: 700;
+  src: url('./assets/fonts/Nunito-Bold.ttf');
+}
+
+@theme {
+  --font-display: 'Nunito', 'sans-serif';
+  --color-*: initial;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-zinc-50: #fafafa;
+  --color-zinc-100: #f4f4f5;
+  --color-zinc-200: #e4e4e7;
+  --color-zinc-300: #d4d4d8;
+  --color-zinc-400: #a1a1aa;
+  --color-zinc-500: #71717a;
+  --color-zinc-600: #52525b;
+  --color-zinc-700: #3f3f46;
+  --color-zinc-800: #27272a;
+  --color-zinc-900: #18181b;
+  --color-zinc-950: #09090b;
+  --color-primary-50: #ecf0ff;
+  --color-primary-100: #dde4ff;
+  --color-primary-200: #c2cdff;
+  --color-primary-300: #9cabff;
+  --color-primary-400: #757dff;
+  --color-primary-500: #615fff;
+  --color-primary-600: #4736f5;
+  --color-primary-700: #3d2ad8;
+  --color-primary-800: #3225ae;
+  --color-primary-900: #2c2689;
+  --color-primary-950: #1c1650;
+}
+
+* {
+  @apply focus:outline-0;
+}
+
+.divider {
+  @apply border-b border-zinc-400 dark:border-zinc-600;
+}
+
+.icon-link {
+  @apply text-zinc-500 dark:text-zinc-400;
+}
+
+.text-size-sm {
+  @apply text-sm md:text-base;
+}
+
+.text-size-base {
+  @apply text-base md:text-lg;
+}
+
+.text-size-lg {
+  @apply text-lg md:text-xl;
+}
+
+.text-size-xl {
+  @apply text-xl md:text-2xl;
+}
+
+.text-size-2xl {
+  @apply text-2xl md:text-3xl;
+}
+
+.text-size-3xl {
+  @apply text-3xl md:text-4xl;
+}
+
+.text-color-body {
+  @apply text-zinc-600 dark:text-zinc-300;
+}
+
+.text-color-title {
+  @apply text-primary-900  dark:text-primary-50;
+}
+
+[data-level='1'] .list-item-rrsi .rrsi-bar:nth-last-child(-n + 1),
+[data-level='2'] .list-item-rrsi .rrsi-bar:nth-last-child(-n + 2),
+[data-level='3'] .list-item-rrsi .rrsi-bar:nth-last-child(-n + 3),
+[data-level='4'] .list-item-rrsi .rrsi-bar:nth-last-child(-n + 4) {
+  color: var(--color-zinc-50);
+}
+
+.loader {
+  aspect-ratio: 2;
+  background: var(--_g) 0% 50%, var(--_g) 50% 50%, var(--_g) 100% 50%;
+  background-size: calc(100% / 3) 50%;
+  animation: anim 1s infinite linear;
+}
+
+.loader-color-primary {
+  --_g: no-repeat radial-gradient(circle closest-side, var(--color-primary-900) 90%, transparent);
+}
+
+.loader-color-cta {
+  --_g: no-repeat radial-gradient(circle closest-side, var(--color-zinc-50) 90%, transparent);
+}
+
+.loader-color-cancel {
+  --_g: no-repeat radial-gradient(circle closest-side, var(--color-zinc-500) 90%, transparent);
+}
+
+@media (prefers-color-scheme: dark) {
+  [data-level='1'] .list-item-rrsi .rrsi-bar:nth-last-child(-n + 1),
+  [data-level='2'] .list-item-rrsi .rrsi-bar:nth-last-child(-n + 2),
+  [data-level='3'] .list-item-rrsi .rrsi-bar:nth-last-child(-n + 3),
+  [data-level='4'] .list-item-rrsi .rrsi-bar:nth-last-child(-n + 4) {
+    color: var(--color-zinc-950);
+  }
+
+  .loader-color-primary {
+    --_g: no-repeat radial-gradient(circle closest-side, var(--color-primary-50) 90%, transparent);
+  }
+
+  .loader-color-cta {
+    --_g: no-repeat radial-gradient(circle closest-side, var(--color-zinc-950) 90%, transparent);
+  }
+
+  .loader-color-cancel {
+    --_g: no-repeat radial-gradient(circle closest-side, var(--color-zinc-50) 90%, transparent);
+  }
+}
+
+@keyframes anim {
+  20% {
+    background-position: 0% 0%, 50% 50%, 100% 50%;
+  }
+  40% {
+    background-position: 0% 100%, 50% 0%, 100% 50%;
+  }
+  60% {
+    background-position: 0% 50%, 50% 100%, 100% 0%;
+  }
+  80% {
+    background-position: 0% 50%, 50% 50%, 100% 100%;
+  }
+}
