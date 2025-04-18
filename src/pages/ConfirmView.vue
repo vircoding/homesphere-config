@@ -4,9 +4,13 @@ import useGlobalEvent from '../composables/useGlobalEvent';
 import CTAButton from '../components/CTAButton.vue';
 import CancelButton from '../components/CancelButton.vue';
 import LinkButton from '../components/LinkButton.vue';
+import { onBeforeRouteLeave } from 'vue-router';
+import useState from '../composables/useState';
 
-const confirmLoading = ref<boolean>(false);
-const cancelLoading = ref<boolean>(false);
+const confirmLoading = ref(false);
+const cancelLoading = ref(false);
+
+const { emitter } = useGlobalEvent();
 
 async function onCancel() {
   cancelLoading.value = true;
@@ -22,9 +26,9 @@ async function onCancel() {
       await fetch('/close', { method: 'POST' });
     }
 
-    useGlobalEvent().emitter('layout:end');
+    emitter('layout:end');
   } catch (error) {
-    console.log(error);
+    emitter('layout:error');
   } finally {
     cancelLoading.value = false;
   }
@@ -44,17 +48,21 @@ async function onSave() {
       await fetch('/setup', { method: 'POST' });
     }
 
-    useGlobalEvent().emitter('layout:end');
+    emitter('layout:end');
   } catch (error) {
-    console.log(error);
+    emitter('layout:error');
   } finally {
     confirmLoading.value = false;
   }
 }
+
+onBeforeRouteLeave(() => {
+  useState().setConfirmAccess(false);
+});
 </script>
 
 <template>
-  <div class="max-w-7xl grow mx-auto px-8 flex flex-col justify-center gap-y-3 md:gap-y-6">
+  <div class="max-w-2xl grow mx-auto px-8 flex flex-col justify-center gap-y-3 md:gap-y-6">
     <!-- Hero -->
     <section>
       <h1 class="text-size-3xl text-color-title font-bold">Confirmar cambios</h1>

@@ -1,5 +1,9 @@
 <script setup lang="ts">
-import IconGitHub from './Icon/IconGitHub.vue';
+import CTAButton from './CTAButton.vue';
+
+function onRefresh() {
+  window.location.reload();
+}
 </script>
 
 <template>
@@ -12,17 +16,22 @@ import IconGitHub from './Icon/IconGitHub.vue';
           class="max-w-2xl grow mx-auto px-8 flex flex-col justify-center items-center gap-y-3 md:gap-y-6"
         >
           <!-- Hero -->
-          <section class="text-center">
-            <h1 class="text-size-3xl text-color-title font-bold mb-3">HomeSphere reinciado</h1>
+          <section>
+            <h1 class="text-size-3xl text-color-title font-bold">Error inesperado</h1>
             <p>
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Omnis pariatur dolores
               commodi aperiam officia quaerat autem.
             </p>
           </section>
 
-          <a href="https://github.com/vircoding" target="_blank" class="inline-block mt-5">
-            <IconGitHub class="icon-link w-10 h-10" />
-          </a>
+          <CTAButton
+            type="button"
+            label="Refrescar"
+            :loading="false"
+            :disabled="false"
+            class="px-6"
+            @click="onRefresh"
+          />
         </div>
       </main>
     </div>

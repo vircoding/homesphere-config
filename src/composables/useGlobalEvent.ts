@@ -2,6 +2,7 @@ import mitt from 'mitt';
 
 type GlobalEvent = {
   'layout:end': void;
+  'layout:error': void;
 };
 
 const emitter = mitt<GlobalEvent>();

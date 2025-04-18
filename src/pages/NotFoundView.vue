@@ -3,7 +3,7 @@ import LinkButton from '../components/LinkButton.vue';
 </script>
 
 <template>
-  <div class="max-w-7xl grow mx-auto px-8 flex flex-col justify-center gap-y-3 md:gap-y-6">
+  <div class="max-w-2xl grow mx-auto px-8 flex flex-col justify-center gap-y-3 md:gap-y-6">
     <!-- Hero -->
     <section>
       <h1 class="text-size-3xl text-color-title font-bold">Página no encontrada</h1>

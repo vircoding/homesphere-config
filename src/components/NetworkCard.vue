@@ -16,7 +16,7 @@ defineEmits<{
 <template>
   <button
     type="button"
-    class="w-full p-3 rounded-lg bg-primary-50 dark:bg-zinc-900 border flex border-primary-300 dark:border-primary-400"
+    class="w-full p-3 rounded-lg bg-primary-50 dark:bg-zinc-900 border flex border-primary-300 dark:border-primary-400 cursor-pointer"
     @click="$emit('selected', network.ssid)"
   >
     <aside class="grow flex items-center gap-x-1.5">
@@ -33,6 +33,6 @@ defineEmits<{
     </aside>
 
     <!-- RSSI -->
-    <IconRSSI :rrsi="props.network.rrsi" />
+    <IconRSSI :rssi="props.network.rssi" />
   </button>
 </template>

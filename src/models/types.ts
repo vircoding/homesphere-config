@@ -5,6 +5,6 @@ export type Input = {
 
 export type Network = {
   ssid: string;
-  rrsi: number;
+  rssi: number;
   secure: boolean;
 };

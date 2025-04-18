@@ -15,7 +15,7 @@ const props = defineProps<{
   >
     <!-- Loader -->
     <div v-if="props.loading" class="py-1">
-      <div class="loader loader-color-cancel h-4"></div>
+      <div class="loader loader-color-cancel h-4 md:h-5"></div>
     </div>
 
     <!-- Label -->

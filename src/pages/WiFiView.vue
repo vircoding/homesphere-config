@@ -6,6 +6,8 @@ import type { Input, Network } from '../models/types';
 import NetworkCard from '../components/NetworkCard.vue';
 import IconRefresh from '../components/Icon/IconRefresh.vue';
 import { useRouter } from 'vue-router';
+import useState from '../composables/useState';
+import useGlobalEvent from '../composables/useGlobalEvent';
 
 const input = reactive<Input>({
   ssid: '',
@@ -13,10 +15,12 @@ const input = reactive<Input>({
 });
 
 const networks = ref<Network[] | undefined>();
-const submitLoading = ref<boolean>(false);
-const scanLoading = ref<boolean>(false);
+const submitLoading = ref(false);
+const scanLoading = ref(false);
 const passwordInputRef = useTemplateRef('passwordInput');
 const router = useRouter();
+
+const { emitter } = useGlobalEvent();
 
 async function onScan() {
   scanLoading.value = true;
@@ -28,12 +32,12 @@ async function onScan() {
           const data: Network[] = [
             {
               ssid: 'nauta_HogarE0E5FA',
-              rrsi: -72,
+              rssi: -72,
               secure: true,
             },
             {
               ssid: '@MC-0462885',
-              rrsi: -77,
+              rssi: -77,
               secure: false,
             },
           ];
@@ -46,7 +50,7 @@ async function onScan() {
       networks.value = data;
     }
   } catch (error) {
-    console.log(error);
+    emitter('layout:error');
   } finally {
     scanLoading.value = false;
   }
@@ -61,7 +65,7 @@ async function onSubmit() {
         setTimeout(() => {
           console.log({ ssid: input.ssid, password: input.password });
           resolve(true);
-        }, 3000);
+        }, 2000);
       });
     } else {
       await fetch('/setup/wifi', {
@@ -73,9 +77,10 @@ async function onSubmit() {
       });
     }
 
+    useState().setConfirmAccess(true);
     await router.push({ name: 'confirm-challenge' });
   } catch (error) {
-    console.log(error);
+    emitter('layout:error');
   } finally {
     submitLoading.value = false;
   }
@@ -88,7 +93,7 @@ function onCardSelected(ssid: string) {
 </script>
 
 <template>
-  <div class="max-w-7xl mx-auto px-8">
+  <div class="max-w-2xl mx-auto px-8">
     <div class="flex flex-col justify-center gap-y-5 md:gap-y-8">
       <!-- Hero -->
       <section>
@@ -99,6 +104,7 @@ function onCardSelected(ssid: string) {
         </p>
       </section>
 
+      <!-- Form -->
       <form @submit.prevent="onSubmit" class="flex flex-col gap-y-2.5">
         <!-- SSID -->
         <InputGroup v-model="input.ssid" type="text" id="ssidInput" label="Nombre de la red" />
@@ -125,7 +131,7 @@ function onCardSelected(ssid: string) {
       <section>
         <!-- Loader -->
         <div v-if="scanLoading" class="flex justify-center py-10">
-          <div class="loader loader-color-primary h-5 md:h-7"></div>
+          <div class="loader loader-color-primary h-5 md:h-6"></div>
         </div>
 
         <!-- List -->
@@ -134,7 +140,7 @@ function onCardSelected(ssid: string) {
             <!-- Hero -->
             <aside class="flex justify-between items-center">
               <h3 class="text-size-2xl text-color-title font-bold">Redes encontradas:</h3>
-              <button type="button" @click="onScan">
+              <button type="button" @click="onScan" class="cursor-pointer">
                 <IconRefresh class="w-8 h-8 md:w-9 md:h-9 p-0.5 text-color-title" />
               </button>
             </aside>
@@ -147,9 +153,11 @@ function onCardSelected(ssid: string) {
           </div>
 
           <div v-else class="flex flex-col justify-center items-center text-center py-10 gap-y-1">
-            <span class="px-4 text-size-xl font-bold">No se encontró ninguna red</span>
-            <button type="button" @click="onScan">
-              <IconRefresh class="w-7 h-7 md:w-8 md:h-8 p-0.5 text-color-title" />
+            <span class="text-color-title text-size-xl px-4 font-bold"
+              >No se encontró ninguna red</span
+            >
+            <button type="button" @click="onScan" class="cursor-pointer">
+              <IconRefresh class="w-8 h-8 md:w-9 md:h-9 p-0.5 text-color-title" />
             </button>
           </div>
         </div>

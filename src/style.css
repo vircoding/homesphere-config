@@ -91,10 +91,10 @@
   @apply text-primary-900  dark:text-primary-50;
 }
 
-[data-level='1'] .list-item-rrsi .rrsi-bar:nth-last-child(-n + 1),
-[data-level='2'] .list-item-rrsi .rrsi-bar:nth-last-child(-n + 2),
-[data-level='3'] .list-item-rrsi .rrsi-bar:nth-last-child(-n + 3),
-[data-level='4'] .list-item-rrsi .rrsi-bar:nth-last-child(-n + 4) {
+[data-level='1'] .list-item-rssi .rssi-bar:nth-last-child(-n + 1),
+[data-level='2'] .list-item-rssi .rssi-bar:nth-last-child(-n + 2),
+[data-level='3'] .list-item-rssi .rssi-bar:nth-last-child(-n + 3),
+[data-level='4'] .list-item-rssi .rssi-bar:nth-last-child(-n + 4) {
   color: var(--color-zinc-50);
 }
 
@@ -118,10 +118,10 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  [data-level='1'] .list-item-rrsi .rrsi-bar:nth-last-child(-n + 1),
-  [data-level='2'] .list-item-rrsi .rrsi-bar:nth-last-child(-n + 2),
-  [data-level='3'] .list-item-rrsi .rrsi-bar:nth-last-child(-n + 3),
-  [data-level='4'] .list-item-rrsi .rrsi-bar:nth-last-child(-n + 4) {
+  [data-level='1'] .list-item-rssi .rssi-bar:nth-last-child(-n + 1),
+  [data-level='2'] .list-item-rssi .rssi-bar:nth-last-child(-n + 2),
+  [data-level='3'] .list-item-rssi .rssi-bar:nth-last-child(-n + 3),
+  [data-level='4'] .list-item-rssi .rssi-bar:nth-last-child(-n + 4) {
     color: var(--color-zinc-950);
   }
 
